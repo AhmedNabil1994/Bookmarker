@@ -1,0 +1,109 @@
+/* fonts */
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&display=swap");
+:root {
+  --main-color: #fec260;
+  --btn-submit-color: tomato;
+  --btn-submit-color-hover: rgb(231, 54, 23);
+  --btn-visit-color: #9eb23b;
+  --btn-visit-color-hover: #8a9e23;
+}
+*::selection {
+  background-color: var(--main-color);
+}
+body {
+  background-color: #f7ecde;
+}
+header h1 {
+  font-family: "Pacifico", cursive;
+  font-size: 3.125rem;
+  color: rgb(53, 46, 40);
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 30%;
+    bottom: 0;
+    background-color: var(--main-color);
+    right: 0;
+    transition: all 0.5s;
+  }
+  &:hover::after {
+    height: 70%;
+  }
+}
+section.bookmark-inputs {
+  .content {
+    border-top: 1px dashed black;
+    border-bottom: 1px dashed black;
+    h2 {
+      font-size: 1.5625rem;
+      font-family: "Righteous", sans-serif;
+      background-image: linear-gradient(to right, #3ca55c, #b5ac49);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      width: fit-content;
+      margin-inline: auto;
+    }
+    .form {
+      font-family: "PT Sans Caption", sans-serif;
+      label {
+        font-weight: 600;
+      }
+      .form-control:focus {
+        border-color: var(--main-color);
+        box-shadow: 0 0 2px 2px var(--main-color);
+      }
+      .btn-submit {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: var(--btn-submit-color);
+        --bs-btn-border-color: var(--btn-submit-color);
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: var(--btn-submit-color-hover);
+        --bs-btn-hover-border-color: var(--btn-submit-color-hover);
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: var(--btn-submit-color);
+        --bs-btn-active-border-color: var(--btn-submit-color);
+      }
+    }
+  }
+}
+section.bookmark-outputs {
+  table {
+    font-family: "PT Sans Caption", sans-serif;
+    thead th {
+      font-weight: 700;
+      color: rgb(33, 37, 41);
+    }
+    tbody th,
+    tbody td {
+      font-weight: 400;
+      color: rgb(33, 37, 41);
+      vertical-align: middle;
+    }
+    tbody td {
+      &:nth-child(3) button {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: var(--btn-visit-color);
+        --bs-btn-border-color: var(--btn-visit-color);
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: var(--btn-visit-color-hover);
+        --bs-btn-hover-border-color: var(--btn-visit-color-hover);
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: var(--btn-visit-color);
+        --bs-btn-active-border-color: var(--btn-visit-color);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 440px) {
+  section.bookmark-outputs table {
+    font-size: 0.75rem;
+    button {
+      font-size: 0.625rem;
+    }
+  }
+}
