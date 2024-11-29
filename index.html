@@ -24,28 +24,28 @@
             </h2>
             <div class="form">
               <div class="mb-3">
-                <label for="bookmarkName" class="form-label"
+                <label for="bookmarkNameInput" class="form-label"
                   ><i class="fa-solid fa-book-bookmark pe-2"></i>Site
                   Name</label
                 >
                 <input
                   type="text"
                   class="form-control"
-                  name="bookmarkName"
-                  id="bookmarkName"
+                  name="bookmarkNameInput"
+                  id="bookmarkNameInput"
                   aria-describedby="helpId"
                   placeholder="Bookmark Name"
                 />
               </div>
               <div class="mb-3">
-                <label for="bookmarkName" class="form-label"
+                <label for="bookmarkURLInput" class="form-label"
                   ><i class="fa-solid fa-link pe-2"></i>Site URL</label
                 >
                 <input
                   type="text"
                   class="form-control"
-                  name="bookmarkName"
-                  id="bookmarkName"
+                  name="bookmarkURLInput"
+                  id="bookmarkURLInput"
                   aria-describedby="helpId"
                   placeholder="Website URL"
                 />
@@ -75,32 +75,7 @@
                   <th scope="col">Delete</th>
                 </tr>
               </thead>
-              <tbody id="table-body">
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>
-                    <button
-                      id="btnVisit"
-                      class="btn btn-success"
-                      onclick="visitBookmark()"
-                    >
-                      <i class="fa fa-solid fa-eye"></i>
-                      Visit
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      id="btnDelete"
-                      class="btn btn-danger"
-                      onclick="deleteBookmark()"
-                    >
-                      <i class="fa fa-solid fa-trash-can"></i>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody id="tableBody"></tbody>
             </table>
           </div>
         </div>
