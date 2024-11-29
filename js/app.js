@@ -11,6 +11,9 @@ var bookmarks = [];
 })();
 
 function createBookmark() {
+  if (checkDuplicateName()) {
+    return;
+  }
   var bookmark = {
     name: bookmarkNameInput.value,
     url: bookmarkURLInput.value,
@@ -21,12 +24,26 @@ function createBookmark() {
   clearForm();
 }
 
+function checkDuplicateName() {
+  for (var i = 0; i < bookmarks.length; i++) {
+    if (
+      bookmarks[i].name.toLowerCase() === bookmarkNameInput.value.toLowerCase()
+    ) {
+      document.getElementById("duplicateModal").classList.remove("d-none");
+      return true;
+    }
+  }
+}
+
 function displayBookmark(list) {
   var bookmarkEl = "";
   for (var index = 0; index < list.length; index++) {
     bookmarkEl += ` <tr>
                         <th scope="row">${index + 1}</th>
-                        <td>${list[index].name}</td>
+                        <td>${
+                          list[index].name.charAt(0).toUpperCase() +
+                          list[index].name.slice(1)
+                        }</td>
                         <td>
                         <button
                             id="btnVisit"
@@ -59,7 +76,7 @@ function deleteBookmark(index) {
 }
 
 function visitBookmark(index) {
-  window.open (bookmarks[index].url,"_blank");
+  window.open(bookmarks[index].url, "_blank");
 }
 
 function clearForm() {
@@ -74,3 +91,5 @@ function setToLocalStorage(key, val) {
 function getFromLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
+
+"ahmed".toUpperCase();
