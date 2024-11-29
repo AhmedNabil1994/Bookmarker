@@ -10,7 +10,7 @@ var bookmarks = [];
   displayBookmark(bookmarks);
 })();
 
-function addBookmark() {
+function createBookmark() {
   var bookmark = {
     name: bookmarkNameInput.value,
     url: bookmarkURLInput.value,

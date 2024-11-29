@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
 :root {
   --main-color: #fec260;
   --btn-submit-color: tomato;
@@ -95,6 +96,49 @@ section.bookmark-outputs {
         --bs-btn-active-bg: var(--btn-visit-color);
         --bs-btn-active-border-color: var(--btn-visit-color);
       }
+    }
+  }
+}
+
+section.validation-popup .modal {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.5)
+  );
+  .modal-header {
+    border: none;
+    .circles .circle {
+      width: 20px;
+      height: 20px;
+      &:first-child {
+        background-color: #f15f5d;
+      }
+      &:nth-child(2) {
+        background-color: #febe2e;
+      }
+      &:last-child {
+        background-color: #4db748;
+      }
+    }
+    span {
+      color: black;
+      font-size: 1.7rem;
+      cursor: pointer;
+    }
+  }
+  .modal-body h2 {
+    font-size: 1.3125rem;
+    color: rgb(53, 46, 40);
+    font-family: "Bree Serif", serif;
+    font-weight: 400;
+  }
+  ol li {
+    font-family: "PT Sans Caption", sans-serif;
+    font-size: 1.125rem;
+    i {
+      color: #f15f5d;
+      font-size: 1.2rem;
     }
   }
 }
