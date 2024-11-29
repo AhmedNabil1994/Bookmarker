@@ -100,8 +100,8 @@ section.bookmark-outputs {
   }
 }
 
-section.duplicate-popup .modal,
-section.validation-popup .modal {
+section.duplicate-popup,
+section.validation-popup {
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.5),

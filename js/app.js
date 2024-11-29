@@ -1,6 +1,7 @@
 var bookmarkNameInput = document.getElementById("bookmarkNameInput");
 var bookmarkURLInput = document.getElementById("bookmarkURLInput");
 var tableBody = document.getElementById("tableBody");
+var duplicateModal = document.getElementById("duplicateModal");
 var bookmarks = [];
 
 (function retrieveBookmarks() {
@@ -22,17 +23,6 @@ function createBookmark() {
   setToLocalStorage("bookmarks", bookmarks);
   displayBookmark(bookmarks);
   clearForm();
-}
-
-function checkDuplicateName() {
-  for (var i = 0; i < bookmarks.length; i++) {
-    if (
-      bookmarks[i].name.toLowerCase() === bookmarkNameInput.value.toLowerCase()
-    ) {
-      document.getElementById("duplicateModal").classList.remove("d-none");
-      return true;
-    }
-  }
 }
 
 function displayBookmark(list) {
@@ -92,4 +82,17 @@ function getFromLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
 
-"ahmed".toUpperCase();
+function checkDuplicateName() {
+  for (var i = 0; i < bookmarks.length; i++) {
+    if (
+      bookmarks[i].name.toLowerCase() === bookmarkNameInput.value.toLowerCase()
+    ) {
+      duplicateModal.classList.remove("d-none");
+      return true;
+    }
+  }
+}
+
+function closePopup(popup) {
+  popup.classList.add("d-none");
+}
