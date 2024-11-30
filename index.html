@@ -35,7 +35,11 @@
                   id="bookmarkNameInput"
                   aria-describedby="helpId"
                   placeholder="Bookmark Name"
+                  oninput="validateForm(this)"
                 />
+                <span class="text-danger ps-2 d-none"
+                  >Site name must contain at least 3 characters
+                </span>
               </div>
               <div class="mb-3">
                 <label for="bookmarkURLInput" class="form-label"
@@ -48,12 +52,16 @@
                   id="bookmarkURLInput"
                   aria-describedby="helpId"
                   placeholder="Website URL"
+                  oninput="validateForm(this)"
                 />
+                <span class="text-danger ps-2 d-none"
+                  >Site URL must be a valid one
+                </span>
               </div>
               <div class="text-center">
                 <button
                   id="btnAdd"
-                  class="px-5 btn btn-submit text-center"
+                  class="px-5 btn btn-submit text-center btn-primary"
                   onclick="createBookmark()"
                 >
                   Submit
@@ -81,7 +89,7 @@
         </div>
       </section>
       <section
-        class="validation-popup modal d-flex justify-content-center align-items-center d-none"
+        class="validationPopup modal d-flex justify-content-center align-items-center d-none"
         id="validationModal"
         tabindex="-1"
         aria-labelledby="validationModalLabel"
@@ -120,8 +128,7 @@
         </div>
       </section>
       <section
-        class="duplicate-popup modal d-flex justify-content-center align-items-center d-none"
-        id="duplicateModal"
+        class="duplicatePopup modal d-flex justify-content-center align-items-center d-none"
         tabindex="-1"
         aria-labelledby="validationModalLabel"
         aria-hidden="true"

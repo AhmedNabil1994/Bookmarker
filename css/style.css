@@ -53,10 +53,6 @@ section.bookmark-inputs {
       label {
         font-weight: 600;
       }
-      .form-control:focus {
-        border-color: var(--main-color);
-        box-shadow: 0 0 2px 2px var(--main-color);
-      }
       .btn-submit {
         --bs-btn-color: #fff;
         --bs-btn-bg: var(--btn-submit-color);
@@ -67,9 +63,19 @@ section.bookmark-inputs {
         --bs-btn-active-color: #fff;
         --bs-btn-active-bg: var(--btn-submit-color);
         --bs-btn-active-border-color: var(--btn-submit-color);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: var(--btn-submit-color);
+        --bs-btn-disabled-border-color: var(--btn-submit-color);
       }
     }
   }
+}
+.form-control:focus {
+  border-color: var(--main-color);
+  color: #212529;
+  background-color: #fff;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem #fec26055;
 }
 section.bookmark-outputs {
   table {
@@ -100,8 +106,8 @@ section.bookmark-outputs {
   }
 }
 
-section.duplicate-popup,
-section.validation-popup {
+section.duplicatePopup,
+section.validationPopup {
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.5),
