@@ -35,6 +35,42 @@ function createBookmark() {
     setToLocalStorage("bookmarks", bookmarks);
     displayBookmark(bookmarks);
     clearForm();
+  } else if (
+    validateForm(bookmarkNameInput) &&
+    !validateForm(bookmarkURLInput)
+  ) {
+    Swal.fire({
+      icon: "error",
+      title: "Invalid URL",
+      text: "Please enter a valid URL following these rules:",
+      html: `
+        <ul style="text-align: left;">
+          <li>Must include a valid domain (e.g., google.com).</li>
+          <li>Optional: Protocol (http:// or https://).</li>
+          <li>Optional: Subdomain (e.g., www).</li>
+          <li>Minimum a single character for the domain name.</li>
+          <li>Domain extension (e.g., .com, .org) is required.</li>
+        </ul>
+      `,
+      confirmButtonText: "OK",
+    });
+  } else if (
+    !validateForm(bookmarkNameInput) &&
+    validateForm(bookmarkURLInput)
+  ) {
+    Swal.fire({
+      icon: "error",
+      title: "Invalid Site Name",
+      text: "Please enter a valid Name following these rules:",
+      html: `
+        <ul style="text-align: left;">
+          <li>Must include at least 3 characters.</li>
+          <li>Can start with _ or numbers.</li>
+          <li>Can not start with any special character except _</li>
+        </ul>
+      `,
+      confirmButtonText: "OK",
+    });
   } else {
     validationPopup.classList.replace("d-none", "d-flex");
   }
@@ -93,6 +129,8 @@ function visitBookmark(index) {
 function clearForm() {
   bookmarkNameInput.value = null;
   bookmarkURLInput.value = null;
+  bookmarkNameInput.classList.remove("is-valid");
+  bookmarkURLInput.classList.remove("is-valid");
 }
 
 function setToLocalStorage(key, val) {
@@ -124,21 +162,11 @@ function validateForm(input) {
   if (isValid) {
     input.classList.remove("is-invalid");
     input.classList.add("is-valid");
-    btnAdd.classList.remove("disabled");
     input.nextElementSibling.classList.replace("d-block", "d-none");
   } else {
     input.classList.add("is-invalid");
     input.classList.remove("is-valid");
-    btnAdd.classList.add("disabled");
     input.nextElementSibling.classList.replace("d-none", "d-block");
-  }
-  if (
-    regex["bookmarkNameInput"].test(bookmarkNameInput.value) &&
-    regex["bookmarkURLInput"].test(bookmarkURLInput.value)
-  ) {
-    btnAdd.classList.remove("disabled");
-  } else {
-    btnAdd.classList.add("disabled");
   }
   return isValid;
 }
@@ -163,10 +191,3 @@ function closePopup(popup) {
   popup.classList.add("d-none");
 }
 
-(function checkEmptyInputs() {
-  if (bookmarkNameInput.value !== "" && bookmarkURLInput.value !== "") {
-    btnAdd.classList.remove("disabled");
-  } else {
-    btnAdd.classList.add("disabled");
-  }
-})();
