@@ -2,14 +2,10 @@
 var bookmarkNameInput = document.getElementById("bookmarkNameInput");
 var bookmarkURLInput = document.getElementById("bookmarkURLInput");
 var tableBody = document.getElementById("tableBody");
-var duplicatePopup = document.querySelector(".duplicatePopup");
 var validationPopup = document.querySelector(".validationPopup");
 var btnAdd = document.getElementById("btnAdd");
 var closeIconValidationPopup = document.querySelector(
   ".validationPopup span.fa-close"
-);
-var closeIconDuplicatePopup = document.querySelector(
-  ".duplicatePopup span.fa-close"
 );
 var popupBox = document.querySelector(".modal-dialog");
 // arrays
@@ -76,6 +72,10 @@ function createBookmark() {
   }
 }
 
+/**
+ * Display bookmarks in the table
+ * @param{object[]}list - an array of objects
+ */
 function displayBookmark(list) {
   var bookmarkEl = "";
   for (var index = 0; index < list.length; index++) {
@@ -110,12 +110,20 @@ function displayBookmark(list) {
   tableBody.innerHTML = bookmarkEl;
 }
 
+/**
+ * Delete a bookmark from the table
+ * @param{number}index - a bookmark index of type number
+ */
 function deleteBookmark(index) {
   bookmarks.splice(index, 1);
   setToLocalStorage("bookmarks", bookmarks);
   displayBookmark(bookmarks);
 }
 
+/**
+ * Visit a bookmark utl
+ * @param{number}index - a bookmark index of type number
+ */
 function visitBookmark(index) {
   if (
     !bookmarks[index].url.startsWith("http://") &&
@@ -133,25 +141,51 @@ function clearForm() {
   bookmarkURLInput.classList.remove("is-valid");
 }
 
+/**
+ * Set a value to the localstorage
+ * @param{string}key - localstorage object key
+ * @param{object[]}val - an array of objects
+ */
 function setToLocalStorage(key, val) {
-  return localStorage.setItem(key, JSON.stringify(val));
+  localStorage.setItem(key, JSON.stringify(val));
 }
 
+/**
+ * Get a value from the localstorage
+ * @param{string}key - localstorage object key
+ * @returns{object[]} - return an array of objects
+ */
 function getFromLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
 
+/**
+ * Check if the bookmark name is duplicated
+ * @returns{boolean} - return true if name is repeated
+ */
 function checkDuplicateName() {
   for (var i = 0; i < bookmarks.length; i++) {
     if (
       bookmarks[i].name.toLowerCase() === bookmarkNameInput.value.toLowerCase()
     ) {
-      duplicatePopup.classList.remove("d-none");
+      Swal.fire({
+        icon: "error",
+        title: "This name already exists",
+        text: ` Please choose a different name.`,
+        confirmButtonText: "OK",
+      });
       return true;
     }
   }
 }
 
+/**
+ * Validates the input of an HTML form element
+ * against a specific regular expression based on its `id`
+ * @param{HTMLElement}input - The HTML input element to validate.
+ * @returns{boolean} - Returns `true` if the input value matches the regex,
+ *  otherwise `false`
+ */
 function validateForm(input) {
   var regex = {
     bookmarkNameInput: /^\w{3,}$/,
@@ -171,23 +205,20 @@ function validateForm(input) {
   return isValid;
 }
 
-closeIconValidationPopup.addEventListener("click", function () {
-  closePopup(validationPopup);
-});
+function closePopup(el, popup) {
+  el.addEventListener("click", function (e) {
+    el === popupBox ? e.stopPropagation() : close(popup);
+  });
+}
 
-closeIconDuplicatePopup.addEventListener("click", function () {
-  closePopup(duplicatePopup);
-});
-
-validationPopup.addEventListener("click", function () {
-  closePopup(validationPopup);
-});
-
-popupBox.addEventListener("click", function (e) {
-  e.stopPropagation();
-});
-
-function closePopup(popup) {
+function close(popup) {
   popup.classList.add("d-none");
 }
+// invoking closePopup fn
+closePopup(closeIconValidationPopup, validationPopup);
+
+closePopup(validationPopup, validationPopup);
+
+closePopup(popupBox);
+
 
